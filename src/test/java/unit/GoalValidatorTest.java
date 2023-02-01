@@ -1,7 +1,7 @@
 package unit;
 
 import app.foot.controller.validator.GoalValidator;
-import app.foot.exception.BadRequestException;
+import app.foot.repository.entity.exception.BadRequestException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
