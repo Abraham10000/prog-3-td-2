@@ -82,8 +82,6 @@ class MatchIntegrationTest {
         scorers.add(PlayerScorer2());
 
         int exceptedGoals = scorers.size();
-        String requestBody = scorers.toString();
-
         ResultActions response = mockMvc.perform(post("/matches/{matchId}/goals", matchId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(scorers)));

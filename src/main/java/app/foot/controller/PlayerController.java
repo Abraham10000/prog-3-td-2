@@ -32,10 +32,10 @@ public class PlayerController {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    //TODO: add PUT /players where you can modify the name and the guardian status of a player
+    //TODO: add PUT /players where you can modify the name and the guardian status of a player --DONE
     // Don't forget to add integration tests for this
     @PutMapping("/players")
-    public List<Player> updatePlayer(@RequestBody List<Player> toUpdate){
+    public List<Player> updatePlayers(@RequestBody List<Player> toUpdate) {
         List<app.foot.model.Player> domain = toUpdate.stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toUnmodifiableList());

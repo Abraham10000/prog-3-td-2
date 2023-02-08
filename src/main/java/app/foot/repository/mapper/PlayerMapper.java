@@ -18,11 +18,15 @@ public class PlayerMapper {
     private final TeamRepository teamRepository;
 
     public Player toDomain(PlayerEntity entity) {
+        String teamName = "";
+        if (entity.getTeam() != null) {
+            teamName = entity.getTeam().getName();
+        }
         return Player.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .isGuardian(entity.isGuardian())
-                .teamName(entity.getTeam().getName())
+                .teamName(teamName)
                 .build();
     }
 
