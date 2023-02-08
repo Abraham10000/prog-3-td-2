@@ -1,5 +1,6 @@
 package app.foot.repository;
 
+import app.foot.controller.rest.Player;
 import app.foot.repository.entity.MatchEntity;
 import app.foot.repository.entity.PlayerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
