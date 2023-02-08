@@ -1,0 +1,102 @@
+openapi: 3.0.0
+servers:
+  - url: https://foot-api-server.com
+info:
+  version: latest
+  title: PROG3 - TD2
+paths:
+  /matches:
+    get:
+      tags:
+        - Matches
+      summary: Get all matches
+      operationId: getMatches
+      responses:
+        '200':
+          description: List of Matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Match'
+  /matches/{matchId}/goals:
+    post:
+      tags:
+        - Matches
+      summary: Add some goals to a match
+      parameters:
+        - name: matchId
+          in: path
+          schema:
+            type: integer
+          required: true
+      description: Be careful! A guardian player can not score a goal.
+      operationId: addGoals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Scorer'
+      responses:
+        '200':
+          description: The updated match with new scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Match'
+components:
+  schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Player:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        isGuardian:
+          type: boolean
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+        datetime:
+          type: string
+          format: datetime
+        stadium:
+          type: string
+        teamA:
+          allOf:
+            - $ref: '#/components/schemas/PlayedTeam'
+        teamB:
+          allOf:
+            - $ref: '#/components/schemas/PlayedTeam'
+    PlayedTeam:
+      type: object
+      properties:
+        team:
+          $ref: '#/components/schemas/Team'
+        goals:
+          type: integer
+        scorers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scorer'
+    Scorer:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/Player'
+        isOG:
+          type: boolean
+        scoreTime:
+          type: integer
